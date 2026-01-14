@@ -20,8 +20,13 @@ const io = new Server(server, {
 app.use(cors());
 app.use(express.json());
 
-// Serve Static Files (Frontend)
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// Serve Static Files (Frontend) -> REMOVED for 2-repo setup
+// app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Basic Health Check Route
+app.get('/', (req, res) => {
+    res.send('Chatroom Backend is running.');
+});
 
 // Routes
 app.post('/api/login', login);
@@ -59,10 +64,10 @@ app.post('/api/messages', authenticateToken, async (req, res) => {
     }
 });
 
-// Catch-all handler for React
-app.get(/(.*)/, (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});
+// Catch-all handler for React -> REMOVED for 2-repo setup
+// app.get(/(.*)/, (req, res) => {
+//    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+// });
 
 // Socket.io
 let moods = {}; // { username: 'Happy' }
